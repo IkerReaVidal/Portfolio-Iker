@@ -1,3 +1,4 @@
+/*Variables globales (modo claro por defecto)*/
 :root {
     --bg-glass: rgba(255, 255, 255, 0.08);
     --border-glass: rgba(255, 255, 255, 0.15);
@@ -6,6 +7,7 @@
     --blur: 15px;
 }
 
+/*Variables para modo oscuro*/
 .modo-oscuro {
     --bg-glass: rgba(0, 0, 0, 0.5);
     --border-glass: rgba(0, 255, 204, 0.3);
@@ -13,8 +15,10 @@
     --accent: #00ffcc; /* Cian neón */
 }
 
+/*Reseteo basico*/
 * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
 
+/*Estilos generales del body*/
 body {
     font-family: 'Segoe UI', Tahoma, sans-serif;
     color: var(--text-color);
@@ -22,6 +26,7 @@ body {
     overflow-x: hidden;
 }
 
+/*Fondo animado Vanta.js*/
 #canvas-bg {
     position: fixed;
     top: 0; left: 0;
@@ -29,6 +34,7 @@ body {
     z-index: -1;
 }
 
+/*Header y menu*/
 header {
     position: sticky; top: 0;
     background: var(--bg-glass);
@@ -41,10 +47,12 @@ header {
     align-items: center;
 }
 
+/*Menu horizontal*/
 .menu { display: flex; list-style: none; gap: 20px; }
 .menu a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: 0.3s; }
-.menu a:hover { color: var(--accent); }
+.menu a:hover { color: var(--accent); }  /*Cambio de color al poner el mouse por encima*/
 
+/*Secciones generales*/
 section {
     background: var(--bg-glass);
     backdrop-filter: blur(var(--blur));
@@ -60,34 +68,45 @@ section {
     transition: opacity 0.8s ease, transform 0.8s ease;
 }
 
+/* Se activa cuando el IntersectionObserver detecta la sección */
 section.visible { opacity: 1; transform: translateY(0); }
 
+/*Habilidades GRID+Barras*/
 .skills-grid { display: grid; gap: 25px; margin-top: 30px; }
+/*Texto de cada skill*/
 .skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: monospace; }
+/*Barra base*/
 .progress-line { width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+/*Barra que se llena dinámicamente*/
 .fill { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 15px var(--accent); transition: width 2s cubic-bezier(0.1, 0.5, 0.5, 1); }
 
+/*Formulario de contacto*/
 #formulario { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
+/*Imput y textarea*/
 input, textarea {
     background: rgba(255,255,255,0.05);
     border: 1px solid var(--border-glass);
     padding: 15px; border-radius: 12px;
     color: white; outline: none; transition: 0.3s;
 }
+/*Efecto al enfocar*/
 input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent); }
 
+/*Botones principales*/
 button#modo-btn, #formulario button {
     background: var(--accent);
     color: #000; border: none; padding: 12px 25px;
     border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;
 }
 
+/*Boton volver arriba*/
 #arriba {
     position: fixed; bottom: 30px; right: 30px;
     background: var(--accent); width: 50px; height: 50px;
     border-radius: 50%; border: none; cursor: pointer; display: none;
 }
 
+/*Perfil y redes socialess*/
 .perfil-container {
     display: flex;
     justify-content: center; 
@@ -96,12 +115,14 @@ button#modo-btn, #formulario button {
     margin-top: 20px;
 }
 
+/*Columna de iconos*/
 .redes-sociales {
     display: flex;
     flex-direction: column; 
     gap: 20px;               
 }
 
+/*Iconos sociales*/
 .redes-sociales a {
     color: #ffcc00;
     font-size: 2.2rem;
@@ -113,6 +134,7 @@ button#modo-btn, #formulario button {
     color: #fff;
 }
 
+/*Foto de perfil*/
 .foto-perfil {
     margin: 0 !important; 
     width: 160px;
