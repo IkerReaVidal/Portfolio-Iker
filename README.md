@@ -16,13 +16,17 @@ El objetivo del portafolio es mostrar mis habilidades en desarrollo web, diseño
 
 ## 📁 Estructura del repositorio  
 ```
-/assets
-   /css
-   /js
-   /img
-   /models
+/img
+/modelos
+   base.obj
+/proyectos
+   /proyecto-1
+   /proyecto-2
+   /proyecto-3
+   /proyecto-4
+datos.json
 index.html
-projects.json
+style.css
 README.md
 ```
 
@@ -30,7 +34,7 @@ README.md
 ## 🔧 Cómo ejecutarlo  
 1. Clona el repositorio:  
    ```bash
-   git clone https://github.com/tuusuario/tu-repo.git
+   git clone https://github.com/ikerreavidal/Portfolio-Iker.git
    ```
 2. Abre `index.html` en tu navegador.  
 3. Disfruta del portafolio.
@@ -47,5 +51,3 @@ README.md
 ## 📬 Contacto  
 Si quieres saber más sobre mis proyectos o colaborar:  
 - **Email:** ikerarmandore@gmail.com  
-
-Si quieres, puedo ayudarte a **personalizarlo**, añadir **badges**, crear una **versión más profesional**, o incluso generar un **README con estilo visual avanzado**. ¿Quieres que lo adaptemos a tu portafolio real?
