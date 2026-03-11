@@ -1,0 +1,18 @@
+{
+  "interfaz": {
+    "velocidad_escritura": 50,
+    "puntos_vanta": 12,
+    "proximidad_vanta": 20
+  },
+  "skills": [
+    {"nombre": "HTML5 / Marcado", "nivel": 95},
+    {"nombre": "CSS3 / Animaciones", "nivel": 85},
+    {"nombre": "JavaScript / ES6+", "nivel": 80},
+    {"nombre": "Python / Lógica", "nivel": 70},
+    {"nombre": "Bash / Scripting", "nivel": 65}
+  ],
+  "validacion": {
+    "nombre_min": 3,
+    "mensaje_exito": "¡Transmisión enviada con éxito, Iker!"
+  }
+}

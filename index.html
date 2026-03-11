@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iker Rea | Portafolio</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+</head>
+<body>
+    <div id="canvas-bg"></div>
+
+    <header>
+        <h1 id="titulo-principal">Portfolio</h1>
+        <nav>
+            <ul class="menu">
+                <li><a href="#sobre-mi">Inicio</a></li>
+                <li><a href="#habilidades">Skills</a></li>
+                <li><a href="#proyectos">Proyectos</a></li>
+                <li><a href="#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <button id="modo-btn">Modo Sistema</button>
+    </header>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <section id="sobre-mi">
+        <h2 class="typewriter-text" data-text="Iker Armando Rea Vidal"></h2>
+        <p class="typewriter-text" data-text="Bienvenido a mi entorno de desarrollo. Aquí puedes explorar mis proyectos y habilidades en distintos lenguajes."></p>
+        <div class="perfil-container">
+        <div class="redes-sociales">
+            <a href="https://github.com/IkerReaVidal" target="_blank"><i class="fab fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/iker-armando-rea-vidal-293b00226/" target="_blank"><i class="fab fa-linkedin"></i></a>
+            <a href="https://instagram.com/ikersito.__.xo" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="mailto:ikerarmandore@gmail.com"><i class="fas fa-envelope"></i></a>
+        </div>
+        <img src="img/perfil.jpeg" alt="Iker Rea" class="foto-perfil" style="width: 150px; border-radius: 50%; margin-top: 20px; border: 3px solid var(--accent);">
+    </section>
+
+    <section id="habilidades">
+        <h2 class="typewriter-text" data-text="Habilidades"></h2>
+        <div class="skills-grid" id="skills-container">
+            </div>
+    </section>
+
+    <section id="proyectos">
+        <h2 class="typewriter-text" data-text="Mis Proyectos"></h2>
+        <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
+            <tr style="border-bottom: 1px solid var(--border-glass);">
+                <th style="padding: 15px; text-align: left;">Proyecto</th>
+                <th style="padding: 15px; text-align: left;">Acceso</th>
+            </tr>
+            <tr>
+                <td style="padding: 15px;">CV ejecutivo</td>
+                <td style="padding: 15px;"><a href="proyectos/proyecto-1/index.html" style="color: var(--accent);">Ver Código</a></td>
+            </tr>
+            <tr>
+                <td style="padding: 15px;">Pagina Web Basica</td>
+                <td style="padding: 15px;"><a href="proyectos/proyecto-2/index.html" style="color: var(--accent);">Ver Código</a></td>
+            </tr>
+            <tr>
+                <td style="padding: 15px;">Tarjeta de San Valentin Interactiva</td>
+                <td style="padding: 15px;"><a href="proyectos/proyecto-3/index.html" style="color: var(--accent);">Ver Código</a></td>
+            </tr>
+            <tr>
+                <td style="padding: 15px;">Rosa JSON Renderer</td>
+                <td style="padding: 15px;"><a href="proyectos/proyecto-4/index.html" style="color: var(--accent);">Ver Código</a></td>
+            </tr>
+        </table>
+    </section>
+
+    <section id="contacto">
+        <h2 class="typewriter-text" data-text="Contactame"></h2>
+        <form id="formulario">
+            <input type="text" id="nombre" placeholder="Nombre de usuario" required>
+            <textarea id="mensaje" rows="4" placeholder="Escriba su mensaje..." required></textarea>
+            <button type="submit">Enviar Paquete</button>
+        </form>
+    </section>
+
+   <section id="zona-avatar" style="height: 500px; background: transparent;">
+    <a-scene embedded style="height: 500px; width: 100%;">
+        <a-assets>
+            <a-asset-item id="mi-muñeco" src="modelos/base.obj"></a-asset-item>
+        </a-assets>
+
+        <a-obj-model src="#mi-muñeco" 
+                     material="shader: standard; 
+                       color: #ffcc00; 
+                       metalness: 0.5; 
+                       roughness: 0.2; 
+                       emissive: #ffcc00; 
+                       emissiveIntensity: 0.2;"
+                    scale="1 1 1" 
+                     position="0 1 -3" 
+                     rotation="0 45 0"
+                     animation="property: rotation; to: 0 405 0; loop: true; dur: 10000">
+        </a-obj-model>
+
+        <a-entity camera position="0 1.6 0"></a-entity>
+        <a-light type="ambient" color="#333" intensity="0.5"></a-light>
+
+        <a-light type="directional" 
+              color="#fff" 
+             intensity="1" 
+             position="-1 2 1">
+        </a-light>
+
+        <a-light type="point" 
+                color="#00ffcc" 
+                intensity="2" 
+                position="2 1 -4">
+        </a-light>
+    </a-scene>
+</section>
+
+    <button id="arriba">↑</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
+
+    <script>
+
+        let vantaEffect = VANTA.NET({
+            el: "#canvas-bg",
+            mouseControls: true,
+            color: 0xffcc00,
+            backgroundColor: 0x0f172a,
+            points: 12.00
+        });
+
+        const skillsData = [
+            {"nombre": "HTML5 / Marcado", "nivel": 90},
+            {"nombre": "CSS3 / Animaciones", "nivel": 85},
+            {"nombre": "JavaScript / ES6+", "nivel": 80},
+            {"nombre": "Python / Lógica", "nivel": 80},
+            {"nombre": "Bash / Scripting", "nivel": 65},
+            {"nombre": "Java / Programación", "nivel": 65},
+            {"nombre": "Git / Control de Versiones", "nivel": 40},
+            {"nombre": "SQL / Bases de Datos", "nivel": 70}
+        ];
+
+        const container = document.getElementById('skills-container');
+        skillsData.forEach(s => {
+            container.innerHTML += `
+                <div class="skill-item" data-percent="${s.nivel}">
+                    <div class="skill-info"><span>${s.nombre}</span><span class="p-num">0%</span></div>
+                    <div class="progress-line"><div class="fill"></div></div>
+                </div>`;
+        });
+
+        const btnModo = document.getElementById("modo-btn");
+        btnModo.addEventListener("click", () => {
+            document.body.classList.toggle("modo-oscuro");
+            const isDark = document.body.classList.contains("modo-oscuro");
+            vantaEffect.setOptions({
+                color: isDark ? 0x00ffcc : 0xffcc00,
+                backgroundColor: isDark ? 0x050505 : 0x0f172a
+            });
+        });
+
+        const typewriter = (el) => {
+            const text = el.getAttribute('data-text');
+            el.innerHTML = '';
+            let i = 0;
+            const timer = setInterval(() => {
+                if (i < text.length) { el.innerHTML += text.charAt(i); i++; }
+                else clearInterval(timer);
+            }, 40);
+        };
+
+        const animarSkills = (sec) => {
+            sec.querySelectorAll('.skill-item').forEach(item => {
+                const target = item.getAttribute('data-percent');
+                item.querySelector('.fill').style.width = target + '%';
+                let count = 0;
+                const interval = setInterval(() => {
+                    if(count >= target) clearInterval(interval);
+                    else { count++; item.querySelector('.p-num').innerText = count + '%'; }
+                }, 20);
+            });
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("visible");
+                    if(entry.target.id === 'habilidades') animarSkills(entry.target);
+                    entry.target.querySelectorAll('.typewriter-text').forEach(t => typewriter(t));
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        document.querySelectorAll('section').forEach(s => observer.observe(s));
+
+
+        VanillaTilt.init(document.querySelectorAll("section"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
+
+        const btnArriba = document.getElementById("arriba");
+        window.addEventListener("scroll", () => btnArriba.style.display = window.scrollY > 400 ? "block" : "none");
+        btnArriba.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
+    </script>
+</body>
+</html>

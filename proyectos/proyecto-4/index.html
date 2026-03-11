@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Rosas en Canvas</title>
+  <style>
+    body {
+      margin: 0;
+      background: black;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+    canvas {
+      background: black;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="canvas" width="800" height="800"></canvas>
+
+  <script>
+    const JSON_FILE = 'roses.json';
+
+    async function loadRegions() {
+      const res = await fetch(JSON_FILE);
+      if (!res.ok) {
+        throw new Error('No se pudo cargar roses.json');
+      }
+      return await res.json();
+    }
+
+    function computeBounds(regions) {
+      const allPoints = [];
+      regions.forEach(r => {
+        r.contour.forEach(p => allPoints.push(p));
+      });
+      const xs = allPoints.map(p => p[0]);
+      const ys = allPoints.map(p => p[1]);
+      const min_x = Math.min(...xs);
+      const max_x = Math.max(...xs);
+      const min_y = Math.min(...ys);
+      const max_y = Math.max(...ys);
+      return { min_x, max_x, min_y, max_y };
+    }
+
+    function filterBigRegions(regions, bounds) {
+      const totalArea = (bounds.max_x - bounds.min_x) * (bounds.max_y - bounds.min_y);
+      return regions.filter(region => {
+        const pts = region.contour;
+        if (pts.length < 3) return false;
+        const xs = pts.map(p => p[0]);
+        const ys = pts.map(p => p[1]);
+        const w = Math.max(...xs) - Math.min(...xs);
+        const h = Math.max(...ys) - Math.min(...ys);
+        const area = w * h;
+        return area <= totalArea * 0.5;
+      });
+    }
+
+    function drawRegions(ctx, regions, bounds, angleDeg) {
+      const width = bounds.max_x - bounds.min_x;
+      const height = bounds.max_y - bounds.min_y;
+      const scale = Math.min(600 / width, 600 / height);
+      const center_x = (bounds.min_x + bounds.max_x) / 2;
+      const center_y = (bounds.min_y + bounds.max_y) / 2;
+
+      const angle = angleDeg * Math.PI / 180;
+      const cosA = Math.cos(angle);
+      const sinA = Math.sin(angle);
+
+      const canvasWidth = ctx.canvas.width;
+      const canvasHeight = ctx.canvas.height;
+      const cx = canvasWidth / 2;
+      const cy = canvasHeight / 2;
+
+      ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+      regions.forEach(region => {
+        const pts = region.contour;
+        if (pts.length < 2) return;
+
+        const r = Math.round(region.color[0] * 255);
+        const g = Math.round(region.color[1] * 255);
+        const b = Math.round(region.color[2] * 255);
+        ctx.fillStyle = `rgb(${r}, ${g}, ${b})`;
+        ctx.strokeStyle = ctx.fillStyle;
+
+        const transformPoint = (px, py) => {
+          let x = (px - center_x) * scale;
+          let y = (center_y - py) * scale;
+          const xr = x * cosA - y * sinA;
+          const yr = x * sinA + y * cosA;
+          return [cx + xr, cy + yr];
+        };
+
+        ctx.beginPath();
+        let [x0, y0] = transformPoint(pts[0][0], pts[0][1]);
+        ctx.moveTo(x0, y0);
+
+        for (let i = 1; i < pts.length; i++) {
+          const [x, y] = transformPoint(pts[i][0], pts[i][1]);
+          ctx.lineTo(x, y);
+        }
+
+        ctx.lineTo(x0, y0);
+        ctx.closePath();
+        ctx.fill();
+      });
+    }
+
+    async function main() {
+      const canvas = document.getElementById('canvas');
+      const ctx = canvas.getContext('2d');
+
+      let regions = await loadRegions();
+const bounds = computeBounds(regions);
+regions = filterBigRegions(regions, bounds);
+
+let visibleRegions = 0;
+const REGIONS_PER_SECOND = 60; 
+let lastTime = performance.now();
+let angle = 0;
+
+function loop(now) {
+  const delta = (now - lastTime) / 1000; 
+  lastTime = now;
+
+  visibleRegions += REGIONS_PER_SECOND * delta;
+  if (visibleRegions > regions.length) {
+    visibleRegions = regions.length;
+  }
+
+  const slice = regions.slice(0, Math.floor(visibleRegions));
+  drawRegions(ctx, slice, bounds, angle);
+
+  angle = (angle + 1) % 360;
+  requestAnimationFrame(loop);
+}
+
+requestAnimationFrame(loop);
+    }
+
+    main().catch(err => {
+      console.error(err);
+      alert('Error cargando/dibujando las rosas. Mira la consola.');
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,121 @@
+:root {
+    --bg-glass: rgba(255, 255, 255, 0.08);
+    --border-glass: rgba(255, 255, 255, 0.15);
+    --text-color: #ffffff;
+    --accent: #ffcc00; /* Amarillo inicial */
+    --blur: 15px;
+}
+
+.modo-oscuro {
+    --bg-glass: rgba(0, 0, 0, 0.5);
+    --border-glass: rgba(0, 255, 204, 0.3);
+    --text-color: #e0e0e0;
+    --accent: #00ffcc; /* Cian neón */
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    color: var(--text-color);
+    background-color: #0f172a;
+    overflow-x: hidden;
+}
+
+#canvas-bg {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    z-index: -1;
+}
+
+header {
+    position: sticky; top: 0;
+    background: var(--bg-glass);
+    backdrop-filter: blur(var(--blur));
+    z-index: 1000;
+    padding: 1.5rem;
+    border-bottom: 1px solid var(--border-glass);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu { display: flex; list-style: none; gap: 20px; }
+.menu a { color: var(--text-color); text-decoration: none; font-weight: 500; transition: 0.3s; }
+.menu a:hover { color: var(--accent); }
+
+section {
+    background: var(--bg-glass);
+    backdrop-filter: blur(var(--blur));
+    padding: 50px;
+    margin: 60px auto;
+    width: 85%;
+    max-width: 1000px;
+    border-radius: 24px;
+    border: 1px solid var(--border-glass);
+    transform-style: preserve-3d;
+    opacity: 0;
+    transform: translateY(40px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+section.visible { opacity: 1; transform: translateY(0); }
+
+.skills-grid { display: grid; gap: 25px; margin-top: 30px; }
+.skill-info { display: flex; justify-content: space-between; margin-bottom: 8px; font-family: monospace; }
+.progress-line { width: 100%; height: 12px; background: rgba(255,255,255,0.1); border-radius: 10px; overflow: hidden; }
+.fill { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 15px var(--accent); transition: width 2s cubic-bezier(0.1, 0.5, 0.5, 1); }
+
+#formulario { display: flex; flex-direction: column; gap: 15px; margin-top: 25px; }
+input, textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid var(--border-glass);
+    padding: 15px; border-radius: 12px;
+    color: white; outline: none; transition: 0.3s;
+}
+input:focus, textarea:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent); }
+
+button#modo-btn, #formulario button {
+    background: var(--accent);
+    color: #000; border: none; padding: 12px 25px;
+    border-radius: 50px; font-weight: bold; cursor: pointer; transition: 0.3s;
+}
+
+#arriba {
+    position: fixed; bottom: 30px; right: 30px;
+    background: var(--accent); width: 50px; height: 50px;
+    border-radius: 50%; border: none; cursor: pointer; display: none;
+}
+
+.perfil-container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;    
+    gap: 30px;          
+    margin-top: 20px;
+}
+
+.redes-sociales {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;               
+}
+
+.redes-sociales a {
+    color: #ffcc00;
+    font-size: 2.2rem;
+    transition: transform 0.3s, color 0.3s;
+}
+
+.redes-sociales a:hover {
+    transform: scale(1.2);
+    color: #fff;
+}
+
+.foto-perfil {
+    margin: 0 !important; 
+    width: 160px;
+    border-radius: 50%;
+    border: 3px solid white;
+}
