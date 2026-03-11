@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iker Rea | Portafolio</title>
-    <link rel="stylesheet" href="styles.css">
-    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <link rel="stylesheet" href="styles.css"> <!-- Hoja de estilos principal -->
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script> <!-- Librería A-Frame para el modelo 3D -->
 </head>
 <body>
-    <div id="canvas-bg"></div>
+
+    <div id="canvas-bg"></div> <!-- Fondo animado generado con Vanta.js -->
 
     <header>
         <h1 id="titulo-principal">Portfolio</h1>
@@ -20,30 +21,33 @@
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
-        <button id="modo-btn">Modo Sistema</button>
+        
+        <button id="modo-btn">Modo Sistema</button> <!-- Botón para alternar entre modo claro/oscuro -->
+        
     </header>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <section id="sobre-mi">
-        <h2 class="typewriter-text" data-text="Iker Armando Rea Vidal"></h2>
+        <h2 class="typewriter-text" data-text="Iker Armando Rea Vidal"></h2> <!-- Texto animado con efecto máquina de escribir -->
         <p class="typewriter-text" data-text="Bienvenido a mi entorno de desarrollo. Aquí puedes explorar mis proyectos y habilidades en distintos lenguajes."></p>
         <div class="perfil-container">
-        <div class="redes-sociales">
+        <div class="redes-sociales"> <!-- Contenedor de redes sociales -->
             <a href="https://github.com/IkerReaVidal" target="_blank"><i class="fab fa-github"></i></a>
             <a href="https://www.linkedin.com/in/iker-armando-rea-vidal-293b00226/" target="_blank"><i class="fab fa-linkedin"></i></a>
             <a href="https://instagram.com/ikersito.__.xo" target="_blank"><i class="fab fa-instagram"></i></a>
             <a href="mailto:ikerarmandore@gmail.com"><i class="fas fa-envelope"></i></a>
         </div>
-        <img src="img/perfil.jpeg" alt="Iker Rea" class="foto-perfil" style="width: 150px; border-radius: 50%; margin-top: 20px; border: 3px solid var(--accent);">
+        <img src="img/perfil.jpeg" alt="Iker Rea" class="foto-perfil" style="width: 150px; border-radius: 50%; margin-top: 20px; border: 3px solid var(--accent);"> <!-- Fotografía de perfil -->
     </section>
 
-    <section id="habilidades">
+    <section id="habilidades"> <!-- Contenedor donde se insertan dinámicamente las barras de progreso -->
         <h2 class="typewriter-text" data-text="Habilidades"></h2>
         <div class="skills-grid" id="skills-container">
             </div>
     </section>
 
     <section id="proyectos">
+        <!-- Cada fila representa un proyecto con enlace a su código -->
         <h2 class="typewriter-text" data-text="Mis Proyectos"></h2>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
             <tr style="border-bottom: 1px solid var(--border-glass);">
@@ -69,7 +73,7 @@
         </table>
     </section>
 
-    <section id="contacto">
+    <section id="contacto"> <!-- Formulario de contacto -->
         <h2 class="typewriter-text" data-text="Contactame"></h2>
         <form id="formulario">
             <input type="text" id="nombre" placeholder="Nombre de usuario" required>
@@ -78,12 +82,14 @@
         </form>
     </section>
 
+    <!-- Zona de avatar modelo 3D -->
    <section id="zona-avatar" style="height: 500px; background: transparent;">
     <a-scene embedded style="height: 500px; width: 100%;">
         <a-assets>
-            <a-asset-item id="mi-muñeco" src="modelos/base.obj"></a-asset-item>
+            <a-asset-item id="mi-muñeco" src="modelos/base.obj"></a-asset-item> <!-- Carga del modelo OBJ -->
         </a-assets>
 
+        <!-- Modelo 3D con animación de rotación -->
         <a-obj-model src="#mi-muñeco" 
                      material="shader: standard; 
                        color: #ffcc00; 
@@ -95,7 +101,7 @@
                      position="0 1 -3" 
                      rotation="0 45 0"
                      animation="property: rotation; to: 0 405 0; loop: true; dur: 10000">
-        </a-obj-model>
+        </a-obj-model> 
 
         <a-entity camera position="0 1.6 0"></a-entity>
         <a-light type="ambient" color="#333" intensity="0.5"></a-light>
@@ -114,33 +120,37 @@
     </a-scene>
 </section>
 
-    <button id="arriba">↑</button>
-
+    <button id="arriba">↑</button> <!-- Botón flotante para volver al inicio -->
+    
+<!-- Librerías externas -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vanilla-tilt/1.7.0/vanilla-tilt.min.js"></script>
 
     <script>
-
+        
+        /*Inicialización del fondo Vanta.js*/
         let vantaEffect = VANTA.NET({
             el: "#canvas-bg",
-            mouseControls: true,
+            mouseControls: true, //Mover de acuerdo al movimiento del mouse
             color: 0xffcc00,
             backgroundColor: 0x0f172a,
-            points: 12.00
+            points: 12.00 //Cantidad de nodos
         });
 
+        /*Datos de habilidades para generar*/
         const skillsData = [
-            {"nombre": "HTML5 / Marcado", "nivel": 90},
-            {"nombre": "CSS3 / Animaciones", "nivel": 85},
-            {"nombre": "JavaScript / ES6+", "nivel": 80},
-            {"nombre": "Python / Lógica", "nivel": 80},
+            {"nombre": "HTML5 / Marcado", "nivel": 80},
+            {"nombre": "CSS3 / Animaciones", "nivel": 80},
+            {"nombre": "JavaScript / ES6+", "nivel": 50},
+            {"nombre": "Python / Lógica", "nivel": 70},
             {"nombre": "Bash / Scripting", "nivel": 65},
             {"nombre": "Java / Programación", "nivel": 65},
             {"nombre": "Git / Control de Versiones", "nivel": 40},
-            {"nombre": "SQL / Bases de Datos", "nivel": 70}
+            {"nombre": "SQL / Bases de Datos", "nivel": 60}
         ];
 
+        /*Inserción dinámica de habilidades*/
         const container = document.getElementById('skills-container');
         skillsData.forEach(s => {
             container.innerHTML += `
@@ -150,31 +160,34 @@
                 </div>`;
         });
 
+        /*Botón modo oscuro*/
         const btnModo = document.getElementById("modo-btn");
         btnModo.addEventListener("click", () => {
-            document.body.classList.toggle("modo-oscuro");
-            const isDark = document.body.classList.contains("modo-oscuro");
-            vantaEffect.setOptions({
+            document.body.classList.toggle("modo-oscuro"); // Alterna la clase en el body
+            const isDark = document.body.classList.contains("modo-oscuro"); //Detectar si esta en modo oscuro
+            vantaEffect.setOptions({  //Cambiar colores del fondo Vanta
                 color: isDark ? 0x00ffcc : 0xffcc00,
                 backgroundColor: isDark ? 0x050505 : 0x0f172a
             });
         });
 
+        /*Función maquina de escribir*/
         const typewriter = (el) => {
             const text = el.getAttribute('data-text');
             el.innerHTML = '';
             let i = 0;
-            const timer = setInterval(() => {
+            const timer = setInterval(() => {  //Escribe letra por letra
                 if (i < text.length) { el.innerHTML += text.charAt(i); i++; }
                 else clearInterval(timer);
             }, 40);
         };
 
+        /*Animación de la barra de habilidades*/
         const animarSkills = (sec) => {
             sec.querySelectorAll('.skill-item').forEach(item => {
                 const target = item.getAttribute('data-percent');
-                item.querySelector('.fill').style.width = target + '%';
-                let count = 0;
+                item.querySelector('.fill').style.width = target + '%';  //Animar la barra
+                let count = 0;  //Contador numerico
                 const interval = setInterval(() => {
                     if(count >= target) clearInterval(interval);
                     else { count++; item.querySelector('.p-num').innerText = count + '%'; }
@@ -182,25 +195,29 @@
             });
         };
 
+        /*IntersectionObserver para activar animaciones*/
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
+                if (entry.isIntersecting) {  //Activar animación de aparición
                     entry.target.classList.add("visible");
-                    if(entry.target.id === 'habilidades') animarSkills(entry.target);
-                    entry.target.querySelectorAll('.typewriter-text').forEach(t => typewriter(t));
-                    observer.unobserve(entry.target);
+                    if(entry.target.id === 'habilidades') animarSkills(entry.target);  //Si es la seccion de actividades animar
+                    entry.target.querySelectorAll('.typewriter-text').forEach(t => typewriter(t));  //Activa maquina de escribir en los textos
+                    observer.unobserve(entry.target);  //Deja de observar la sección
                 }
             });
         }, { threshold: 0.2 });
 
-        document.querySelectorAll('section').forEach(s => observer.observe(s));
+        document.querySelectorAll('section').forEach(s => observer.observe(s));  //Observar todas las secciones
 
 
+        /*Efecto 3D con VanilaTilt*/
         VanillaTilt.init(document.querySelectorAll("section"), { max: 5, speed: 400, glare: true, "max-glare": 0.1 });
 
+        /*Botón para volver arriba*/
         const btnArriba = document.getElementById("arriba");
-        window.addEventListener("scroll", () => btnArriba.style.display = window.scrollY > 400 ? "block" : "none");
-        btnArriba.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));
+        window.addEventListener("scroll", () => btnArriba.style.display = window.scrollY > 400 ? "block" : "none");  //Mostrar/ocultar el botón segun scroll
+        btnArriba.addEventListener("click", () => window.scrollTo({top: 0, behavior: 'smooth'}));  //Animación suave al subir
     </script>
 </body>
+
 </html>
